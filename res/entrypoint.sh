@@ -52,6 +52,9 @@ pactl load-module module-remap-source master=microphone.monitor source_name=micr
 pactl set-source-volume 3 60%
 
 echo -e "\nStart script.."
+
+export SESSION_MANAGER=$(cat ~/.ICEauthority | perl -pe 's/.*(local.*?unix\/\d*).*/$1/'),$(cat ~/.ICEauthority | perl -pe 's/.*(local.*?unix\/\d*).*/$1/; s/local/unix/')
+
 sleep 5
 
 # Start python script in separated terminal
