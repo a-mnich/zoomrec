@@ -32,27 +32,27 @@ RUN apt-get update && \
         wget \
         locales \
         bzip2 \
-        tzdata && \
+        tzdata
 # Generate locales for en_US.UTF-8
-    locale-gen en_US.UTF-8 && \
+RUN    locale-gen en_US.UTF-8 && \
 # Install tigervnc
     wget -q -O tigervnc-1.10.0.x86_64.tar.gz https://sourceforge.net/projects/tigervnc/files/stable/1.10.0/tigervnc-1.10.0.x86_64.tar.gz && \
     tar xz -f tigervnc-1.10.0.x86_64.tar.gz --strip 1 -C / && \
-    rm -rf tigervnc-1.10.0.x86_64.tar.gz && \
+    rm -rf tigervnc-1.10.0.x86_64.tar.gz
 # Install xfce ui
-    apt-get install --no-install-recommends -y \
+RUN    apt-get install --no-install-recommends -y \
         supervisor \
         xfce4 \
         xfce4-goodies \
         xfce4-pulseaudio-plugin \
         xfce4-terminal \
-        xubuntu-icon-theme && \
+        xubuntu-icon-theme
 # Install pulseaudio
-    apt-get install --no-install-recommends -y \
+RUN    apt-get install --no-install-recommends -y \
         pulseaudio \
-        pavucontrol && \
+        pavucontrol
 # Install necessary packages
-    apt-get install --no-install-recommends -y \
+RUN    apt-get install --no-install-recommends -y \
         ibus \
         dbus-user-session \
         dbus-x11 \
@@ -81,14 +81,16 @@ RUN apt-get update && \
         libxslt1.1 \
         libsqlite3-0 \
         libxcb-keysyms1 \
-        libxcb-xtest0 && \
+        libxcb-xtest0 \
+        libxcb-cursor0 \
+        libxcb-icccm4
 # Install Zoom
-    wget -q -O zoom_amd64.deb https://cdn.zoom.us/prod/5.13.4.711/zoom_amd64.deb && \
+RUN    wget -q -O zoom_amd64.deb https://cdn.zoom.us/prod/6.0.0.4563/zoom_amd64.deb && \
     dpkg -i zoom_amd64.deb && \
     apt-get -f install -y && \
-    rm -rf zoom_amd64.deb && \
+    rm -rf zoom_amd64.deb
 # Install FFmpeg
-    apt-get install --no-install-recommends -y \
+RUN    apt-get install --no-install-recommends -y \
         ffmpeg \
         libavcodec-extra && \
 # Install Python dependencies for script
@@ -98,8 +100,8 @@ RUN apt-get update && \
         python3-tk \
         python3-dev \
         python3-setuptools \
-        scrot && \
-    pip3 install --upgrade --no-cache-dir -r ${HOME}/res/requirements.txt && \
+        scrot
+RUN    pip3 install --upgrade --no-cache-dir -r ${HOME}/res/requirements.txt && \
 # Install VLC - optional
     apt-get install --no-install-recommends -y vlc && \
 # Clean up
